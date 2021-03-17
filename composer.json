@@ -1,0 +1,39 @@
+{
+    "name": "own3d/socket",
+    "description": "OWN3D Socket Client",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "René Preuß",
+            "email": "rene.p@own3d.tv"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "^6.3|^7.0",
+        "own3d/id": "^1.7"
+    },
+    "require-dev": {
+        "own3d/php-cs-fixer-config": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "Own3d\\Socket\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Own3d\\Socket\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "fix": [
+            "vendor/bin/php-cs-fixer fix"
+        ]
+    }
+}
