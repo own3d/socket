@@ -10,7 +10,7 @@ class SocketClientTest extends TestCase
     {
         $socketClient = new SocketClient();
 
-        $socketClient->emit([
+        $result = $socketClient->emit([
             'room' => 'twitch.106415581',
             'event' => 'notifysub',
             'data' => [
@@ -27,5 +27,7 @@ class SocketClientTest extends TestCase
                 ],
             ],
         ]);
+
+        self::assertTrue($result);
     }
 }
