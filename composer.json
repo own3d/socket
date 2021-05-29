@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
+        "illuminate/support": "~5.4|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
         "guzzlehttp/guzzle": "^6.3|^7.0",
         "own3d/id": "^1.7"
     },
@@ -35,5 +36,12 @@
         "fix": [
             "vendor/bin/php-cs-fixer fix"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Own3d\\Socket\\ServiceProvider"
+            ]
+        }
     }
 }
