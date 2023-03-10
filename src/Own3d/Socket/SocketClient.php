@@ -4,10 +4,19 @@ namespace Own3d\Socket;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Own3d\Socket\Support\SocketToken;
 use Throwable;
 
 class SocketClient
 {
+    /**
+     * List of available servers. May not be complete.
+     */
+    public const SERVER_IDS = [
+        'socket-edge-hel1-1',
+        'socket-edge-hel1-2',
+    ];
+
     public static string $baseUrl = 'https://socket-hel1-1.own3d.dev';
 
     private Client $client;
@@ -38,10 +47,10 @@ class SocketClient
      *  - data: array
      *
      * @param array $parameters
-     * @param array|null $serverId The server id is the hostname, that should receive the message (optional).
+     * @param string|null $serverId The server id is the hostname, that should receive the message (optional).
      * @return bool
      */
-    public function emit(array $parameters, array $serverId = null): bool
+    public function emit(array $parameters, string $serverId = null): bool
     {
         $options = [
             RequestOptions::JSON => $parameters,
@@ -57,6 +66,34 @@ class SocketClient
 
         try {
             $response = $this->getClient()->post('emit', $options);
+        } catch (Throwable $exception) {
+            return false;
+        }
+
+        return in_array($response->getStatusCode(), [200, 204]);
+    }
+
+    /**
+     * Sends a message into the own3d websocket system.
+     *
+     * @param string $token Pre-signed token for the socket server to emit a message.
+     * @param string|null $serverId The server id is the hostname, that should receive the message (optional).
+     * @return bool
+     */
+    public function jwtEmit(string $token, string $serverId = null): bool
+    {
+        $options = [
+            RequestOptions::JSON => [
+                'token' => $token,
+            ],
+        ];
+
+        if ($serverId) {
+            $options[RequestOptions::HEADERS]['cookie'] = sprintf('serverid=%s', $serverId);
+        }
+
+        try {
+            $response = $this->getClient()->post('jwt-emit', $options);
         } catch (Throwable $exception) {
             return false;
         }

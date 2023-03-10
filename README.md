@@ -14,6 +14,7 @@ Add the `own3d-socket` configuration within the `config/services.php` config fil
 'own3d-socket' => [
     'username' => env('OWN3D_SOCKET_USERNAME', 'own3d-socket'),
     'password' => env('OWN3D_SOCKET_PASSWORD')
+    'secret' => env('OWN3D_SOCKET_SECRET'),
 ],
 ```
 
