@@ -13,8 +13,8 @@ class SocketToken
 
     /**
      * Generates a pre-signed token for the socket server to join a room.
-     *
      * This will generate a token that can be used to authenticate with the socket server to join a specific room.
+     * If the room starts with `private`, the socket server will also join the public room with the same name.
      */
     public static function auth(string $room): string
     {

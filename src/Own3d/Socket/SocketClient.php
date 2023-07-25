@@ -42,7 +42,7 @@ class SocketClient
      * Sends a message into the own3d websocket system.
      *
      * Required parameters:
-     *  - room: string
+     *  - room: string|string[]
      *  - event: string
      *  - data: array
      *
