@@ -27,7 +27,7 @@ class SocketToken
     /**
      * Generate a pre-signed token for the socket server to emit a message.
      */
-    public static function emit(string $room, string $event, array $data): string
+    public static function emit(string|array $room, string $event, array $data): string
     {
         return self::encode(self::payload('emit', [
             'room' => $room,
